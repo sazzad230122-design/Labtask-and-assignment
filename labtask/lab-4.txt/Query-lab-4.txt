@@ -1,0 +1,85 @@
+Query no.1
+#Find the ProductName,Unit,and Price of all products.
+Answer:
+[{select ProductName, Unit, Price
+    from Product;}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.2
+#Find the CategoryID and CategoryName where Description contains 'Soft drinks'.
+Answer:
+[{select CategoryID,CategoryName
+  from Category
+  where Description LIKE '%Soft drinks%';}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.3
+#Find the ProductName of products costing less than $15.00.
+Answer:
+[{select ProductName
+  from Product
+  where Price<15.00;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.4
+#Find the FirstName,LastName,and City of employees whose Title is'Sales Rep'.
+Answer:
+[{select FirstName, LastName, City
+  from Employee
+  where Title ='Sales Rep';}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.5
+#Find ProductName and Price where SupplierID = 1 and Price > 18.00.
+Answer:
+[{select ProductName, Price
+  from Product
+  where SupplierID = 1
+  and Price > 18.00;}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.6
+#Find CompanyName of customers from Germany or Mexico.
+Answer:
+[{select CompanyName
+  from Customer
+  where Country = 'Germany'
+  or Country = 'Mexico';}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.7
+#Find CompanyName and Country of customers not from the UK.
+Answer:
+[{select CompanyName, Country
+  from Customer
+  where Country<>'UK';}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.8
+#Find OrderID and CustomerID for orders placed on or after 2025-07-05.
+Answer:
+[{select OrderID, CustomerID
+ from Orders
+ where OrderDate >= '2025-07-05';}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.9
+#Find ProductName and CategoryName.
+Answer :
+[{select Product.ProductName,Category.CategoryName
+  from Product, Category
+  where Product.CategoryID = Category.CategoryID;}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.10
+#Find ProductName and Supplier City.
+Answer:
+[{select Product.ProductName,Supplier.City
+  from Product, Supplier
+  where Product.SupplierID = Supplier.SupplierID;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.11
+#Find OrderID and Employee LastName.
+Answer:
+[{select Orders.OrderID,Employee.LastName
+ from Orders, Employee
+ where Orders.EmployeeID = Employee.EmployeeID;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.12
+#Find ProductName and CategoryName for products that are NOT in the Seafood category.
+Answer :
+[{select Product.ProductName,Category.CategoryName
+ from Product, Category
+ where Product.CategoryID = Category.CategoryID
+ and Category.CategoryName <> 'Seafood';}]

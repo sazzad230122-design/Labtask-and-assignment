@@ -1,0 +1,125 @@
+Query no.1
+#Find instructors whose name contains "an".
+Answer:
+[{select name
+  from instructor
+  where name LIKE '%an%';}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.2
+#Find student ID and Course ID where grade is NULL.
+Answer :
+[{select ID, course_id
+ from takes
+ where grade IS NULL;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.3
+#Count instructors in each department.
+Answer :
+[{select dept_name, COUNT(*) AS total_instructors
+  from instructor
+  group by dept_name;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.4
+#Find average salary in each department.
+Answer:
+[{select dept_name, avg(salary) as avg_salary
+ from instructor
+  group by dept_name;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.5
+#Departments with average salary greater than 70000.
+Answer :
+[{select dept_name, avg(salary) as avg_salary
+ from instructor
+ group by dept_name
+ having avg(salary)>70000;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.6
+#Courses offered in Fall 2024 AND Spring 2025.
+Answer:
+[{select course_id
+ from section
+ where semester = 'Fall'
+  and year = 2024
+ intersect
+ select course_id
+ from section
+ where semester = 'Spring'
+and year = 2025;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.7
+#Courses in Fall 2024 but NOT in Spring 2025.
+Answer:
+[{select course_id
+ from section
+  where semester = 'Fall'
+  and year = 2024
+ expect
+  select course_id
+  from section
+   where semester = 'Spring'
+  and year = 2025;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.8
+#Combine instructor names and student names.
+Answer:
+[{select name
+ from instructor
+ union
+ select name
+ from student;}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.9
+#Instructors earning more than the average salary.
+Answer:
+[{select name
+ from instructor
+ where salary >
+(
+select avg(salary)
+from instructor
+);}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.10
+#Salary greater than at least one Biology instructor.
+[{select name
+ from instructor
+ whwre salary > SOME
+(
+ select salary
+ from instructor
+ where dept_name = 'Biology'
+);}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.11
+#Students who took CS-101.
+Answer:
+[{select name
+ from student
+ where ID IN
+(
+select ID
+from takes
+where course_id = 'CS-101'
+);}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.12
+#Since Music department does not exist, insert it first.
+Answer:
+[{ insert into department
+ values ('Music', 'Music Hall', 60000);
+ insert into instructor
+ values ('99999', 'Mozart', 'Music', 50000);}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.13
+#Increase salary by 5% for Comp. Sci. instructors.
+Answer:
+[{update instructor
+ set salary = salary * 1.05
+ where dept_name = 'Comp. Sci.';}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.14
+#Delete students with total credits less than 40.
+Answer:
+[{select from student
+ where tot_cred < 40;}]

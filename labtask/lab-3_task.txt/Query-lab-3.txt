@@ -1,0 +1,100 @@
+Query no.1 
+#Show the name and department name of all instructors.
+Answer:
+[{select name,dept_name
+from instructor}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.2
+#Show the names of instructors whose salary is greater than 70000.
+Answer :
+[{
+select name
+from instructor
+where salary >70000
+}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Query no.3
+Answer:
+#Show the name and total credits of students in the'Comp.Sci.'department.
+[{
+select name,tot_cred
+from student
+where dept_name='com.sci';
+}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.4
+#Show the title and credits of courses that have exactly 3 credits.
+Answer:
+[{
+select title,credits
+from course
+where credits=3;
+}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.5
+#Show the name and salary of instructors who are in the Finance department and earn more than 80000.
+Answer:
+[{select name,salary
+from instructor
+where dept_name= 'Finance'
+and salary >80000;}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.6
+#Show the names of instructors who are not in the Comp.Sci.department.
+Answer:
+[{select name
+from instructor
+where dept_name<>'Comp.Sci.';}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.7
+#Show the instructor's name, department name, and department budget.
+Answer:
+[{select instructor.name,instructor.dept_name, department.budget
+from instructor,department
+where instructor.dept_name=department.dept_name}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.8
+#Show the IDs of students whose advisor has instructor ID 10101.
+Answer:
+[{select s_ID
+from advisor
+where i_ID='10101';}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.9
+#Show the student name and the course ID of the courses they have taken.
+Answer:
+[{select student.name,takes.course_id
+from student,takes
+where student.ID=takes.ID;}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.10
+#Show the names of instructors who have taught in the Taylor building.
+Answer:
+[{select instructor.name
+from instructor,teaches,section
+where instructor.ID=teaches.ID
+AND teaches.course_id=section.course_id
+AND teaches.sec_id=section.sec_id
+AND teaches.semester=section.semester
+AND teaches.year=section.year
+AND section.building='Taylor';}]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.11
+#Show the course title and the title of its prerequisite course.
+Answer:
+[{select c.title,p.title
+from course as c, course as p,prereq
+where c.course_id=prereq.course_id
+and p.course_id=prereq.prereq_id;}]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+query no.12
+#Show the names of instructors who earn more than the instructor named 'Einstein'.
+Answer:
+[{select name
+from instructor
+where salary >
+(
+    select salary
+    from instructor
+    where name ='Einstein'
+);}]
